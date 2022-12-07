@@ -1,0 +1,61 @@
+﻿@model IEnumerable<DataAccess.Layer.Models.File>
+
+@{
+    ViewData["Title"] = "show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome!!</h2>
+
+
+
+
+<div class="m-3">
+    <a asp-action="Create" class="btn btn-success">Upload New File</a>
+</div>
+
+
+
+
+
+<div class="table-responsive">
+
+
+
+    <table class="table table-bordered table-info table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fpath)
+                </th>
+                <th>Action(s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        <a href="@Url.Content("https://taskmgi.blob.core.windows.net/development/Images/MicrosoftTeams-image.png")" target="_blank" class="btn btn-link text-primary one"> @Html.DisplayFor(modelItem => item.Title)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fpath)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                        <a href="/Home/Delete?id=@item.Id&blobName=@item.Fpath" class="btn btn-link text-danger one" onclick="return confirm('Are you sure?')"> Delete </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
